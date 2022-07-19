@@ -6,6 +6,17 @@ import java.io.Writer;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Pretty-prints <b>valid</b> JSON strings to the specified target.
+ * First, the string is tokenized into a buffer.
+ * Then, the tokens are printed with the specified amount of indentation.
+ * <p>
+ * This class does not perform any validation on the specified JSON strings.
+ * Passing an invalid JSON to any of the pretty-printing methods may result in undefined behaviour.
+ * <p>
+ * Note: this class is not thread-safe.
+ * External synchronization is needed when an instance is used by multiple threads.
+ */
 public class JsonPrettyPrinter {
 
     private static final int DEFAULT_INDENT_AMOUNT = 2;
@@ -21,10 +32,19 @@ public class JsonPrettyPrinter {
     private final int indentAmount;
     private PrintWriter printer;
 
+    /**
+     * Creates a new instance with the default amount of indentation, which is 2.
+     */
     public JsonPrettyPrinter() {
         this(DEFAULT_INDENT_AMOUNT);
     }
 
+    /**
+     * Creates a new instance with the specified amount of indentation.
+     *
+     * @param indentAmount the amount of indentation for printing, i.e. the number of spaces per level of indentation
+     * @throws IllegalArgumentException if {@code indentAmount} is not between 0 and 10 inclusive
+     */
     public JsonPrettyPrinter(int indentAmount) {
         validate(indentAmount);
         this.indentAmount = indentAmount;
@@ -36,16 +56,37 @@ public class JsonPrettyPrinter {
         }
     }
 
+    /**
+     * Returns the amount of indentation configured for this instance.
+     *
+     * @return the amount of indentation
+     */
     public int getIndentAmount() {
         return indentAmount;
     }
 
+    /**
+     * Pretty-prints the specified JSON string to the specified writer.
+     * The writer remains open after this method returns.
+     *
+     * @param json   the valid JSON string to be pretty-printed
+     * @param writer the target writer
+     * @throws NullPointerException if any of the parameters is null
+     */
     public void prettyPrint(String json, Writer writer) {
         requireNonNull(writer, "writer cannot be null");
         printer = new PrintWriter(writer, true);
         prettyPrint(json);
     }
 
+    /**
+     * Pretty-prints the specified JSON string to the specified output stream.
+     * The output stream remains open after this method returns.
+     *
+     * @param json         the valid JSON string to be pretty-printed
+     * @param outputStream the target output stream
+     * @throws NullPointerException if any of the parameters is null
+     */
     public void prettyPrint(String json, OutputStream outputStream) {
         requireNonNull(outputStream, "outputStream cannot be null");
         printer = new PrintWriter(outputStream, true);

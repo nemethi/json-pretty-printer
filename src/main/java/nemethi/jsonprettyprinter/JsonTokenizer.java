@@ -7,6 +7,13 @@ import java.util.Iterator;
 import static java.lang.Character.isWhitespace;
 import static java.util.Objects.requireNonNull;
 
+/**
+ * This is an auxiliary class for {@link JsonPrettyPrinter}.
+ * It reads and breaks a <b>valid</b> JSON string into tokens.
+ * <p>
+ * The tokens are stored in an internal buffer from where they can be read
+ * by calling the {@link JsonTokenizer#iterator()} method or using an enhanced {@code for} statement.
+ */
 public class JsonTokenizer implements Iterable<String> {
 
     private static final String STRUCTURAL_CHARACTERS = "{}[]:,";
@@ -19,6 +26,13 @@ public class JsonTokenizer implements Iterable<String> {
     private boolean betweenQuotes;
     private boolean escapedChar;
 
+    /**
+     * Creates a new instance by tokenizing the specified JSON string.
+     * The string is not validated: passing an invalid JSON string may result in undefined behaviour.
+     *
+     * @param json the valid JSON string to be broke into tokens
+     * @throws NullPointerException if {@code json} is null
+     */
     public JsonTokenizer(String json) {
         requireNonNull(json, "json cannot be null");
         tokenize(json);
@@ -76,6 +90,11 @@ public class JsonTokenizer implements Iterable<String> {
         return !isWhitespace(currentChar);
     }
 
+    /**
+     * Returns an iterator over the tokens in the internal buffer.
+     *
+     * @return an iterator over the tokens in the internal buffer
+     */
     @Override
     public Iterator<String> iterator() {
         return tokens.iterator();
