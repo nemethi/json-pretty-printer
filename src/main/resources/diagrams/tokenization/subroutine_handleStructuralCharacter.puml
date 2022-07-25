@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from subroutine //testCharacter//
+
+group Subroutine handleStructuralCharacter
+  if (//betweenQuotes// is ""true""?) is (yes) then
+    :Append character to //currentToken//;
+  else (no)
+    if (//currentToken// is not empty?) is (yes) then
+      :Add contents of //currentToken// to //tokens//
+      Clear //currentToken//;
+    endif
+    :Add character to //tokens//;
+  endif
+end group
+
+stop
+note: Return to subroutine //testCharacter//
+
+@enduml

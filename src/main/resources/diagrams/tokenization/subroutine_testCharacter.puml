@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from main routine
+
+group Subroutine testCharacter
+  switch (Test character)
+  case (Is it a structural character?)
+    floating note left
+    Structural characters are **{}[]:,**
+    ====
+    Quote character is **"**
+    ====
+    Escape character is **\**
+    end note
+    :Call subroutine //handleStructuralCharacter//;
+  case (Is it a quote character?)
+    :Negate //betweenQuotes//
+    Append character to //currentToken//;
+  case (Is it an escape character?)
+    :Set //escapedChar// to ""true""
+    Append character to //currentToken//;
+  case (Is none of the others?)
+    :Call subroutine //handleOtherCharacters//;
+  endswitch
+end group
+
+stop
+note: Return to main routine
+
+@enduml

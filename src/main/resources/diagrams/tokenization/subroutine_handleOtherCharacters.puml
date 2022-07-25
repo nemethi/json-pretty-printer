@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from subroutine //testCharacter//
+
+if (current character is **not** whitespace OR //betweenQuotes// is ""true""?) is (yes) then
+  :Append character to //currentToken//;
+endif
+
+stop
+note: Return to subroutine //testCharacter//
+
+@enduml

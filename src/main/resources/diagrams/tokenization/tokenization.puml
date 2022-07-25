@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Input is a JSON string
+group Main routine
+  :Initialize string list //tokens//
+  Initialize character buffer //currentToken//
+  Set flag //betweenQuotes// to ""false""
+  Set flag //escapedChar// to ""false"";
+
+  :Convert JSON string to character array and iterate over it;
+  while (Is there a next character?) is (yes)
+    :Read character;
+    if (//escapedChar// is ""true"") is (yes) then
+      :Set //escapedChar// to ""false""
+      Append character to //currentToken//;
+    else (no)
+      :Call subroutine //testCharacter//;
+    endif
+  endwhile (no)
+end group
+
+stop
+note: List //tokens// contains the tokens
+
+@enduml
