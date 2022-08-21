@@ -5,6 +5,11 @@ A small Java library for pretty-printing JSON data.
 This project is free and unencumbered public domain software.
 Feel free (and I encourage you) to do anything you want with it. You do not even have to give any credit.
 
+The [diagrams](src/main/resources/diagrams) directory contains explanatory diagrams to help you
+understand the algorithms in case you are not well-versed in Java.
+Look for _tokenization.png_ and _prettyprinting.png_. All diagrams are generated from their respective
+PlantUML descriptions. (`*.puml` files)
+
 Simply copy and paste the classes into your project. Modify them to your liking and to fit your needs.
 The project also contains unit and integration tests which can be useful to you.
 
