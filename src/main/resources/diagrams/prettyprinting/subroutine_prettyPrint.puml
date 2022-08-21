@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from main routine
+
+group Subroutine prettyPrint
+  if (Is the current token the start of a structure?) then (yes)
+    :Call subroutine //prettyPrintStructureStart//
+    Assign the returned value to //level//;
+  (no) elseif (Is the current token the end of a structure?) then (yes)
+    :Call subroutine //prettyPrintStructureEnd//
+    Assign the returned value to //level//;
+  else (no)
+    :Call subroutine //prettyPrintToken//;
+  endif
+end group
+
+stop
+note: Return //level// to main routine
+
+@enduml

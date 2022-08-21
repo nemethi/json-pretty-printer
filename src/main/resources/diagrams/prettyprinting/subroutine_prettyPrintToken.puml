@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from subroutine //prettyPrint//
+
+group Subroutine prettyPrintToken
+  if (Is the current token a comma or a colon?) is (yes) then
+    :Print the current token;
+  else (no)
+    if (Is the previousToken a colon?) is (yes) then
+      :Print a space character
+      Print the current token;
+    else (no)
+      :Print a line break
+      Print the current token indented by the level;
+    endif
+  endif
+end group
+
+stop
+note: Return to subroutine //prettyPrint//
+
+@enduml

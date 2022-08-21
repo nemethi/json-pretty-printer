@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Input is a JSON string
+group Main routine
+  :Initialize output buffer
+  Tokenize JSON string with tokenizer
+  Initialize integer //level// to ""0""
+  Initialize string //previousToken// to empty string;
+
+  :Iterate over tokens from tokenizer;
+  while (Is there a next token?) is (yes)
+    :Call subroutine //prettyPrint//
+    Assign the returned value to //level//
+    Assign the current token to //previousToken//;
+  endwhile (no)
+
+  :Flush the output buffer;
+end group
+
+stop
+
+@enduml

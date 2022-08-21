@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from subroutine //prettyPrint//
+
+group Subroutine prettyPrintStructureEnd
+  if (Is the previous token the start of a structure?) is (yes) then
+    :Print the current token
+    Decrement //level//;
+  else (no)
+    :Print a line break
+    Decrement //level//
+    Print the current token indented by the level;
+  endif
+end group
+
+stop
+note: Return //level// to subroutine //prettyPrint//
+
+@enduml

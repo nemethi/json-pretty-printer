@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: Call from subroutine //prettyPrint//
+
+group Subroutine prettyPrintStructureStart
+  if (Is the previous token a comma?) then (yes)
+    :Print a line break;
+  else (no)
+  endif
+  if (Is the previous token the start of a structure?) is (yes) then
+    :Print a line break
+    Print the current token indented by the level
+    Increment //level//;
+  else (no)
+    if (Is the previous token a colon?) then (yes)
+      :Print a space character
+      Print the current token
+      Increment //level//;
+    else (no)
+      :Print the current token indented by the level
+      Increment //level//;
+    endif
+  endif
+end group
+
+stop
+note: Return //level// to subroutine //prettyPrint//
+
+@enduml
